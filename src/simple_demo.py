@@ -21,13 +21,13 @@ def read_simple_message() -> simple_pb2.SimpleMessage:
     return simple_message
 
 
-def serialize_proto(msg: simple_pb2.SimpleMessage, path: str) -> None:
+def serialize_proto_simple(msg: simple_pb2.SimpleMessage, path: str) -> None:
     with open(path, "wb") as fout:
         str_bytes: bytes = msg.SerializeToString()
         fout.write(str_bytes)
 
 
-def deserialize_proto(path: str) -> simple_pb2.SimpleMessage:
+def deserialize_proto_simple(path: str) -> simple_pb2.SimpleMessage:
     with open(path, "rb") as fin:
         # there seems to be no intermediate bytes representation involved
         # simple_message: simple_pb2.SimpleMessage = simple_pb2.SimpleMessage()
@@ -42,9 +42,10 @@ def simple_message() -> None:
     msg = read_simple_message()
     _path = "src/simple.bin"
 
-    serialize_proto(msg, _path)
-    assert msg == deserialize_proto(_path), "deserialization unsuccessful"
+    serialize_proto_simple(msg, _path)
+    assert msg == deserialize_proto_simple(_path), "deserialization unsuccessful"
 
 
 if __name__ == "__main__":
     simple_message()
+    enum_message()
