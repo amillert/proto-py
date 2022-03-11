@@ -1,4 +1,4 @@
 #!/bin/bash
 
-protoc -I=src/ --python_out=src/ src/simple.proto
-protoc -I=src/ --python_out=src/ src/enum.proto
+protoc -I=src/proto/message/ --python_out=src/proto/message/reflection src/proto/message/simple.proto
+protoc -I=src/proto/message/ --python_out=src/proto/message/reflection src/proto/message/enum.proto
