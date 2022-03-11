@@ -1,4 +1,5 @@
 import simple_pb2
+import enum_pb2
 
 
 def read_simple_message() -> simple_pb2.SimpleMessage:
@@ -44,6 +45,35 @@ def simple_message() -> None:
 
     serialize_proto_simple(msg, _path)
     assert msg == deserialize_proto_simple(_path), "deserialization unsuccessful"
+
+
+def read_enum_message() -> enum_pb2.EnumMessage:
+    enum_message = enum_pb2.EnumMessage()
+    enum_message.id = 234
+    enum_message.day_of_the_week = enum_pb2.SATURDAY  # equal to setting to 6
+
+    return enum_message
+
+
+def serialize_proto_enum(msg: enum_pb2.EnumMessage, path: str) -> None:
+    with open(path, "wb") as fout:
+        str_bytes: bytes = msg.SerializeToString()
+        fout.write(str_bytes)
+
+
+def deserialize_proto_enum(path: str) -> enum_pb2.EnumMessage:
+    with open(path, "rb") as fin:
+        msg = enum_pb2.EnumMessage().FromString(fin.read())
+
+    return msg
+
+
+def enum_message() -> None:
+    msg = read_enum_message()
+    _path = "src/enum.bin"
+
+    serialize_proto_enum(msg, _path)
+    assert msg == deserialize_proto_enum(_path), "deserialization unsuccessful"
 
 
 if __name__ == "__main__":
