@@ -40,7 +40,7 @@ def deserialize_proto(path: str) -> simple_pb2.SimpleMessage:
 
 if __name__ == "__main__":
     msg = simple_message()
-    _path = "simple/simple.bin"
+    _path = "src/simple.bin"
 
     serialize_proto(msg, _path)
     assert msg == deserialize_proto(_path), "deserialization unsuccessful"
