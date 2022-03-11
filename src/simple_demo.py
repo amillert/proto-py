@@ -1,7 +1,7 @@
 import simple_pb2
 
 
-def simple_message() -> simple_pb2.SimpleMessage:
+def read_simple_message() -> simple_pb2.SimpleMessage:
     """
     Uses reflection; therefore, can't really navigate the code freely
     """
@@ -38,9 +38,13 @@ def deserialize_proto(path: str) -> simple_pb2.SimpleMessage:
     return msg
 
 
-if __name__ == "__main__":
-    msg = simple_message()
+def simple_message() -> None:
+    msg = read_simple_message()
     _path = "src/simple.bin"
 
     serialize_proto(msg, _path)
     assert msg == deserialize_proto(_path), "deserialization unsuccessful"
+
+
+if __name__ == "__main__":
+    simple_message()
