@@ -1,3 +1,3 @@
 #!/bin/bash
 
-protoc -I=simple/ --python_out=simple/ simple/simple.proto
+protoc -I=src/ --python_out=src/ src/simple.proto
